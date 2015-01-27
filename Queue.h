@@ -4,7 +4,7 @@
 #include <cstddef>
 
 #include "Collection.h"
-#include "../Node/Node.h"
+#include "Node.h"
 
 template <class T>
 class Queue : public Collection<T>
@@ -16,10 +16,12 @@ class Queue : public Collection<T>
 		void enqueue(T x);
 		void dequeue();
 		bool empty();
+		void empty_queue();
 
 		T get();
 		void add(T x);
 		void remove();
+		void empty_collection();
 
 	private:
 		Node<T> *front_;
@@ -36,10 +38,7 @@ Queue<T>::Queue()
 template <class T>
 Queue<T>::~Queue()
 {
-	while (!empty())
-	{
-		dequeue();
-	}
+	empty_queue();
 }
 
 template <class T>
@@ -71,6 +70,15 @@ bool Queue<T>::empty()
 }
 
 template <class T>
+void Queue<T>::empty_queue()
+{
+	while (!empty())
+	{
+		dequeue();
+	}
+}
+
+template <class T>
 T Queue<T>::get()
 {
 	return front();
@@ -86,5 +94,11 @@ template <class T>
 void Queue<T>::remove()
 {
 	dequeue();
+}
+
+template <class T>
+void Queue<T>::empty_collection()
+{
+	empty_queue();
 }
 #endif
